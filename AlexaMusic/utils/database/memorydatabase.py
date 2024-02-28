@@ -458,8 +458,6 @@ async def maintenance_on():
 
 #audio
 
-from pytgcalls.types.input_stream.quality import AudioParameters, AudioQuality, VideoParameters, VideoQuality
-
 
 async def save_audio_bitrate(chat_id: int, bitrate: str):
     audio[chat_id] = bitrate
