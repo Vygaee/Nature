@@ -12,6 +12,7 @@ as you want or you can collabe if you have new ideas.
 
 import config
 from config import PRIVATE_BOT_MODE
+from pytgcalls.types import AudioParameters, AudioQuality, VideoParameters, VideoQuality
 from AlexaMusic.core.mongo import mongodb
 
 channeldb = mongodb.cplaymode
@@ -458,9 +459,6 @@ async def maintenance_on():
 
 
 # Audio Video Limit
-
-from pytgcalls.types import AudioParameters, AudioQuality, VideoParameters, VideoQuality
-
 
 async def save_audio_bitrate(chat_id: int, bitrate: str):
     audio[chat_id] = bitrate
