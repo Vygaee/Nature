@@ -456,8 +456,9 @@ async def maintenance_on():
         return
     return await onoffdb.insert_one({"on_off": 1})
 
-
 # Audio Video Limit
+
+from pytgcalls.types import AudioParameters, AudioQuality, VideoParameters, VideoQuality
 
 async def save_audio_bitrate(chat_id: int, bitrate: str):
     audio[chat_id] = bitrate
