@@ -10,7 +10,6 @@ as you want or you can collabe if you have new ideas.
 """
 
 from .channelplay import *
-from .database import *
 from .decorators import *
 from .formatters import *
 from .inline import *
