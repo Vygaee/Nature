@@ -11,5 +11,6 @@ as you want or you can collabe if you have new ideas.
 
 
 from .assistantdatabase import *
+from .memorydatabase import *
 from .mongodatabase import *
 from .theme import *
