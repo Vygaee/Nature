@@ -1,74 +1,44 @@
-# Copyright (C) 2024 by Alexa_Help @ Github, < https://github.com/TheTeamAlexa >
-# Subscribe On YT < Jankari Ki Duniya >. All rights reserved. © Alexa © Yukki.
-
-""""
-TheTeamAlexa is a project of Telegram bots with variety of purposes.
-Copyright (c) 2024 -present Team=Alexa <https://github.com/TheTeamAlexa>
-
-This program is free software: you can redistribute it and can modify
-as you want or you can collabe if you have new ideas.
-"""
-
-
-# Copyright (C) 2024 by Alexa_Help @ Github, < https://github.com/TheTeamAlexa >
-# Subscribe On YT < Jankari Ki Duniya >. All rights reserved. © Alexa © Yukki.
-
-""""
-TheTeamAlexa is a project of Telegram bots with variety of purposes.
-Copyright (c) 2024 -present Team=Alexa <https://github.com/TheTeamAlexa>
-
-This program is free software: you can redistribute it and can modify
-as you want or you can collabe if you have new ideas.
-"""
-
-
 import asyncio
-import os
 from datetime import datetime, timedelta
 from typing import Union
 
 from pyrogram import Client
+from pyrogram.errors import (ChatAdminRequired,
+                             UserAlreadyParticipant,
+                             UserNotParticipant)
 from pyrogram.types import InlineKeyboardMarkup
 from pytgcalls import PyTgCalls, StreamType
-from pytgcalls.exceptions import (
-    AlreadyJoinedError,
-    NoActiveGroupCall,
-    TelegramServerError,
-)
-from pytgcalls.types import Update
+from pytgcalls.exceptions import (AlreadyJoinedError,
+                                  NoActiveGroupCall,
+                                  TelegramServerError)
+from pytgcalls.types import (JoinedGroupCallParticipant,
+                             LeftGroupCallParticipant, Update)
 from pytgcalls.types.input_stream import AudioPiped, AudioVideoPiped
-from pytgcalls.types.input_stream.quality import HighQualityAudio, MediumQualityVideo
 from pytgcalls.types.stream import StreamAudioEnded
 
 import config
+from strings import get_string
 from AlexaMusic import LOGGER, YouTube, app
 from AlexaMusic.misc import db
-from AlexaMusic.utils.database import (
-    add_active_chat,
-    add_active_video_chat,
-    get_assistant,
-    get_audio_bitrate,
-    get_lang,
-    get_loop,
-    get_video_bitrate,
-    group_assistant,
-    is_autoend,
-    music_on,
-    remove_active_chat,
-    remove_active_video_chat,
-    set_loop,
-)
+from AlexaMusic.utils.database import (add_active_chat,
+                                       add_active_video_chat,
+                                       get_assistant,
+                                       get_audio_bitrate, get_lang,
+                                       get_loop, get_video_bitrate,
+                                       group_assistant, is_autoend,
+                                       music_on, mute_off,
+                                       remove_active_chat,
+                                       remove_active_video_chat,
+                                       set_loop)
 from AlexaMusic.utils.exceptions import AssistantErr
-from AlexaMusic.utils.inline.play import stream_markup, telegram_markup
+from AlexaMusic.utils.inline.play import (stream_markup,
+                                          telegram_markup)
 from AlexaMusic.utils.stream.autoclear import auto_clean
 from AlexaMusic.utils.thumbnails import gen_thumb
-from AlexaMusic.utils.theme import check_theme
-from strings import get_string
 
 autoend = {}
 counter = {}
-AUTO_END_TIME = 1
-
+AUTO_END_TIME = 3
 
 async def _clear_(chat_id):
     db[chat_id] = []
